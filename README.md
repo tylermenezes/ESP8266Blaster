@@ -14,7 +14,7 @@ but it means you don't need to reprogram your microcontroller each time you add 
 ## Installation and Flashing
 
 This code uses Arduino's language/libraries because someone had already written an IR library, and I didn't want to
-duplicate that work in LUA. You'll need to configure Arduino's IDE to talk to the ESP8266.
+duplicate that work in LUA. You'll need to [configure Arduino's IDE to talk to the ESP8266.](https://learn.sparkfun.com/tutorials/esp8266-thing-hookup-guide/installing-the-esp8266-arduino-addon)
 
 You'll also need to install [IRremoteESP8266](https://github.com/markszabo/IRremoteESP8266) into your Arduino libraries
 folder.
@@ -32,9 +32,9 @@ like [IrScrutinizer](http://harctoolbox.org/IrScrutinizer.html) to find and conv
 The protocol for communicating is very simple: send a byte stream to the device's IP, on the port configured in the
 code, as follows:
 
-- 1 byte: unsigned short (0-255) carrier frequency. This is usually 37 or 38.
-- 2 bytes: unsigned short (0-65535) length of the IR data.
-- n bytes: stream of two-byte-long shorts (0-65535) of raw IR data.
+- 1 byte: uint8 (0-255) carrier frequency. This is usually 37 or 38.
+- 2 bytes: uint16 (0-65535) length of the IR data.
+- n bytes: stream of uint16s (0-65535) of raw IR data.
 
 The length field should be the number of bytes remaining in the packet (not the number of shorts, or the total packet
 size).
